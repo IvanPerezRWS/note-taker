@@ -38,7 +38,7 @@ app.get("/api/notes", function (err, res) {
 // writes new note to json file for browser
 app.post("/api/notes", function (req, res) {
     try {
-        createNoteData = fs.readFileSync("./db/db.json", utf8);
+        createNoteData = fs.readFileSync("./db/db.json", "utf8");
         console.log(createNoteData);
         createNoteData = JSON.parse(createNoteData);
         req.body.id = createNoteData.length;
@@ -65,7 +65,7 @@ app.delete("/api/notes/:id", function (req, res) {
         });
         createNoteData = JSON.stringify(createNoteData);
 
-        fs.writeFile("./db/db.sjon", createNoteData, "utf8", function (err) {
+        fs.writeFile("./db/db.json", createNoteData, "utf8", function (err) {
             if (err) throw err;
         });
 
@@ -85,11 +85,11 @@ app.get("/notes", function(req, res) {
 
 // Default to home if no route is found
 app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+  });
+  app.get("/api/notes", function (req, res) {
     return res.sendFile(path.json(__dirname, "db/db.json"));
-});
-app.get("/api/notes", function(req, res) {
-    return res.sendFile(path.json(__dirname, "db/db.json"));
-});
+  });
 
 // Start server on port
 app.listen(PORT, function () {
