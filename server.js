@@ -75,9 +75,19 @@ app.delete("/api/notes/:id", function (req, res) {
     }
 });
 
+// HTML get requests
+
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
+
 // Default to home if no route is found
 app.get("*", function (req, res) {
-    return res.sendFile(path.json(__dirname, :db/db.json));
+    return res.sendFile(path.json(__dirname, "db/db.json"));
+});
+app.get("/api/notes", function(req, res) {
+    return res.sendFile(path.json(__dirname, "db/db.json"));
 });
 
 // Start server on port
