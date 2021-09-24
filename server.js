@@ -1,6 +1,7 @@
 // import dependencies to interact with the front end.
 const express = require('express');
-
+const path = require('path');
+const fs = require("fs");
 
 // creating a server
 const app = express();
