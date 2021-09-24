@@ -65,17 +65,15 @@ app.delete("/api/notes/:id", function (req, res) {
         createNoteData = JSON.stringify(createNoteData);
 
         fs.writeFile("./db/db.sjon", createNoteData, "utf8", function (err) {
-            if (err) {
-                throw err;
-                console.log(err);
-            }
+            if (err) throw err;
         });
+
+        res.send(JSON.parse(createNoteData));
+    } catch (err) {
+        throw err;
+        console.log(err);
     }
 });
-
-
-
-
 
 // Default to home if no route is found
 app.get("*", function (req, res) {
